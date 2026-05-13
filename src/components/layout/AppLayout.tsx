@@ -8,6 +8,7 @@ import { Topbar } from "./Topbar";
 
 export function AppLayout({ title, children }: { title: string; children: ReactNode }) {
   const pathname = usePathname();
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   return (
     <div className="app-shell">
       <Sidebar />
@@ -15,7 +16,7 @@ export function AppLayout({ title, children }: { title: string; children: ReactN
         <Topbar title={title} />
         <nav className="mobile-nav">
           {navItems.map(([href, label, Icon]) => (
-            <Link key={href} className={`nav-link ${pathname.startsWith(href) ? "active" : ""}`} href={href}>
+            <Link key={href} className={`nav-link ${isActive(href) ? "active" : ""}`} href={href} aria-current={isActive(href) ? "page" : undefined}>
               <Icon size={16} /> {label}
             </Link>
           ))}

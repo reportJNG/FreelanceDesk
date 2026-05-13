@@ -30,14 +30,14 @@ export function Topbar({ title }: { title: string }) {
     <header className="topbar">
       <div className="topbar-title">
         <div className="topbar-kicker">Private admin dashboard</div>
-        <strong>{title}</strong>
+        <strong className="topbar-heading">{title}</strong>
       </div>
       <div className="topbar-actions">
         <Link className="button" href="/clients/new"><Plus size={16} /> Add Client</Link>
         <button className="button secondary" onClick={toggleTheme} title="Toggle theme" aria-label="Toggle theme">
           {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
         </button>
-        <button className="button secondary" onClick={logout} title="Sign out"><LogOut size={16} /> Logout</button>
+        <button className="button secondary" onClick={logout} title="Sign out"><LogOut size={16} /> Sign out</button>
       </div>
     </header>
   );

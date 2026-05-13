@@ -1,6 +1,7 @@
 "use client";
 
 import { Plus } from "lucide-react";
+import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { PageHeader } from "../../components/common/PageHeader";
@@ -23,15 +24,15 @@ export function SupportRequestsPage() {
   if (query.error) return <ErrorState error={query.error} />;
   const items = query.data?.items ?? [];
   return <>
-    <PageHeader title="Fixes / Support" action={<a className="button" href="/fixes/new"><Plus size={16} /> New Request</a>} />
-    {items.length === 0 ? <EmptyState title="No support requests" action={<a className="button" href="/fixes/new">Create request</a>} /> : <DataTable<SupportRequest> items={items} columns={[
+    <PageHeader title="Fixes / Support" description="Log maintenance work, support requests, and small billable fixes." action={<Link className="button" href="/fixes/new"><Plus size={16} /> New Request</Link>} />
+    {items.length === 0 ? <EmptyState title="No support requests" description="Add a request when a client needs a fix or maintenance task." action={<Link className="button" href="/fixes/new">Create request</Link>} /> : <DataTable<SupportRequest> items={items} columns={[
       { header: "Title", render: (r) => <strong>{r.title}</strong> },
       { header: "Type", render: (r) => r.request_type },
       { header: "Priority", render: (r) => <PriorityBadge value={r.priority} /> },
       { header: "Status", render: (r) => <StatusBadge value={r.status} /> },
       { header: "Price", render: (r) => <><strong>{formatMoney(r.price)}</strong><div className="muted">{formatMoney(r.remaining_amount ?? 0)} left</div></> },
       { header: "Due", render: (r) => r.due_date ?? "Not set" },
-      { header: "Actions", render: (r) => <div className="table-actions"><ConfirmDialog label="Delete this support request?" action="Delete" onConfirm={() => remove.mutate(r.id)} /></div> },
+      { header: "Actions", align: "right", render: (r) => <div className="table-actions"><ConfirmDialog label="Delete this support request?" action="Delete" onConfirm={() => remove.mutate(r.id)} /></div> },
     ]} />}
   </>;
 }

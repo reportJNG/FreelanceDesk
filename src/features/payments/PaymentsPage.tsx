@@ -30,11 +30,11 @@ export function PaymentsPage() {
     <div className="section-gap" />
     <DataTable<Payment> items={payments.data?.items ?? []} columns={[
       { header: "Date", render: (p) => p.paid_at ?? "Not set" },
-      { header: "Amount", render: (p) => formatMoney(p.amount) },
+      { header: "Amount", render: (p) => <strong>{formatMoney(p.amount)}</strong> },
       { header: "Client", render: (p) => p.client_name ?? "Not set" },
       { header: "Method", render: (p) => p.method },
       { header: "Status", render: (p) => <PaymentStatusBadge value={p.status} /> },
-      { header: "Actions", render: (p) => <div className="table-actions"><ConfirmDialog label="Delete this payment?" action="Delete" onConfirm={() => remove.mutate(p.id)} /></div> },
-    ]} />
+      { header: "Actions", align: "right", render: (p) => <div className="table-actions"><ConfirmDialog label="Delete this payment?" action="Delete" onConfirm={() => remove.mutate(p.id)} /></div> },
+    ]} emptyTitle="No payments recorded" emptyDescription="Record a payment to keep revenue and unpaid totals current." />
   </>;
 }

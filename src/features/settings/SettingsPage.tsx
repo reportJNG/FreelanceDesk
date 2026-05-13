@@ -29,7 +29,7 @@ export function SettingsPage() {
       <div className="form-actions"><button className="button" disabled={mutation.isPending}>{mutation.isPending ? "Saving..." : "Save settings"}</button></div>
     </form>
     <div className="card section-gap">
-      <h3>Security note</h3>
+      <h3 className="card-title">Security note</h3>
       <p className="muted">Keep real passwords in a password manager. FreelanceDesk only stores optional notes or references and hides sensitive project fields by default.</p>
     </div>
   </>;

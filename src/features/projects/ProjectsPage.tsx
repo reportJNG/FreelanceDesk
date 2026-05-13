@@ -23,16 +23,16 @@ export function ProjectsPage() {
   if (query.error) return <ErrorState error={query.error} />;
   const items = query.data?.items ?? [];
   return <>
-    <PageHeader title="Projects" action={<Link className="button" href="/projects/new"><Plus size={16} /> Add Project</Link>} />
-    {items.length === 0 ? <EmptyState title="No projects yet" action={<Link className="button" href="/projects/new">Create project</Link>} /> : (
+    <PageHeader title="Projects" description="Track scope, stack, status, credentials, and project financials." action={<Link className="button" href="/projects/new"><Plus size={16} /> Add Project</Link>} />
+    {items.length === 0 ? <EmptyState title="No projects yet" description="Create a project once a client has active work." action={<Link className="button" href="/projects/new">Create project</Link>} /> : (
       <DataTable<Project> items={items} columns={[
-        { header: "Project", render: (p) => <a href={`/projects/${p.id}`}><strong>{p.name}</strong><div className="muted">{p.domain}</div></a> },
+        { header: "Project", render: (p) => <><strong>{p.name}</strong><div className="muted">{p.domain || "No domain"}</div></> },
         { header: "Status", render: (p) => <StatusBadge value={p.status} /> },
-        { header: "Stack", render: (p) => [...(p.languages ?? []), ...(p.frameworks ?? [])].join(", ") },
+        { header: "Stack", render: (p) => [...(p.languages ?? []), ...(p.frameworks ?? [])].join(", ") || "Not set" },
         { header: "Total", render: (p) => <><strong>{formatMoney(p.total_price)}</strong><div className="muted">{formatMoney(p.remaining_amount ?? 0)} left</div></> },
         { header: "Test End", render: (p) => p.test_end_date ?? "Not set" },
-        { header: "Actions", render: (p) => <div className="table-actions"><a className="button secondary" href={`/projects/${p.id}/edit`}>Edit</a><ConfirmDialog label="Archive this project?" onConfirm={() => archive.mutate(p.id)} /></div> },
-      ]} />
+        { header: "Actions", align: "right", render: (p) => <div className="table-actions"><Link className="button small secondary" href={`/projects/${p.id}/edit`}>Edit</Link><ConfirmDialog label="Archive this project?" onConfirm={() => archive.mutate(p.id)} /></div> },
+      ]} rowHref={(project) => `/projects/${project.id}`} />
     )}
   </>;
 }

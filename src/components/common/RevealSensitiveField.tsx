@@ -7,7 +7,7 @@ export function RevealSensitiveField({ label, value }: { label: string; value?: 
   const [visible, setVisible] = useState(false);
   return (
     <div className="card">
-      <div className="subtle">{label}</div>
+      <h3 className="card-title">{label}</h3>
       <div className="sensitive-row">
         <code className="code-value">{visible ? value || "Not set" : "Hidden"}</code>
         <button className="button secondary" type="button" onClick={() => setVisible((current) => !current)}>

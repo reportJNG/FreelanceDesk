@@ -41,7 +41,7 @@ export default function ProtectedLayout({ children }: { children: ReactNode }) {
     if (isAuthed === false) router.replace("/login");
   }, [isAuthed, router]);
 
-  if (isAuthed === null) return <div className="content"><div className="card">Checking session...</div></div>;
+  if (isAuthed === null) return <div className="auth-page"><div className="card state-card"><div><div className="spinner" aria-label="Checking session" /><p className="state-description">Checking session...</p></div></div></div>;
   if (!isAuthed) return <LoginPage />;
 
   const title = titles.find(([pattern]) => pattern.test(pathname))?.[1] ?? "FreelanceDesk";

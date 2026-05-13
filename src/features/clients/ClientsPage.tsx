@@ -23,16 +23,16 @@ export function ClientsPage() {
   const items = query.data?.items ?? [];
   return (
     <>
-      <PageHeader title="Clients" action={<Link className="button" href="/clients/new"><Plus size={16} /> Add Client</Link>} />
-      {items.length === 0 ? <EmptyState title="No clients yet" action={<Link className="button" href="/clients/new">Add your first client</Link>} /> : (
+      <PageHeader title="Clients" description="Manage client profiles, contact details, and work history." action={<Link className="button" href="/clients/new"><Plus size={16} /> Add Client</Link>} />
+      {items.length === 0 ? <EmptyState title="No clients yet" description="Create a client profile before adding projects or payments." action={<Link className="button" href="/clients/new">Add your first client</Link>} /> : (
         <DataTable<Client> items={items} columns={[
-          { header: "Name", render: (c) => <a href={`/clients/${c.id}`}><strong>{c.name}</strong><div className="muted">{c.company_name}</div></a> },
+          { header: "Name", render: (c) => <><strong>{c.name}</strong><div className="muted">{c.company_name || "Independent client"}</div></> },
           { header: "Contact", render: (c) => <><div>{c.email}</div><div className="muted">{c.phone}</div></> },
           { header: "Work", render: (c) => <><strong>{c.projects_count ?? 0}</strong><div className="muted">projects</div></> },
           { header: "Status", render: (c) => <StatusBadge value={c.status} /> },
           { header: "Created", render: (c) => new Date(c.created_at).toLocaleDateString() },
-          { header: "Actions", render: (c) => <div className="table-actions"><a className="button secondary" href={`/clients/${c.id}/edit`}>Edit</a><ConfirmDialog label="Archive this client?" onConfirm={() => archive.mutate(c.id)} /></div> },
-        ]} />
+          { header: "Actions", align: "right", render: (c) => <div className="table-actions"><Link className="button small secondary" href={`/clients/${c.id}/edit`}>Edit</Link><ConfirmDialog label="Archive this client?" onConfirm={() => archive.mutate(c.id)} /></div> },
+        ]} rowHref={(client) => `/clients/${client.id}`} />
       )}
     </>
   );

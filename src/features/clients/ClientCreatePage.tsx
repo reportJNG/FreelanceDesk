@@ -9,5 +9,5 @@ import { clientsApi } from "./clientsApi";
 export function ClientCreatePage() {
   const queryClient = useQueryClient();
   const mutation = useMutation({ mutationFn: clientsApi.create, onSuccess: (client) => { toast.success("Client created"); queryClient.invalidateQueries({ queryKey: ["clients"] }); window.location.href = `/clients/${client.id}`; }, onError: (error) => toast.error(error instanceof Error ? error.message : "Could not create client") });
-  return <><PageHeader title="New Client" /><ClientForm onSubmit={(values) => mutation.mutate(values)} submitLabel="Create client" disabled={mutation.isPending} /></>;
+  return <><PageHeader title="New Client" description="Add contact details and notes for future work." /><ClientForm onSubmit={(values) => mutation.mutate(values)} submitLabel="Create client" disabled={mutation.isPending} /></>;
 }

@@ -14,16 +14,15 @@ export function RemindersPage() {
   if (query.error) return <ErrorState error={query.error} />;
   const entries = Object.entries(query.data ?? {});
   return <>
-    <PageHeader title="Reminders" />
+    <PageHeader title="Reminders" description="Upcoming items that need attention across client work and payments." />
     <div className="grid">
       {entries.map(([group, items]) => (
         <div className="card" key={group}>
-          <h3>{titleize(group)}</h3>
-          {items.length === 0 ? <p className="muted">Nothing here.</p> : items.map((item, index) => <pre key={index} className="muted" style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(item, null, 2)}</pre>)}
+          <h3 className="card-title">{titleize(group)}</h3>
+          {items.length === 0 ? <p className="muted">Nothing due.</p> : items.map((item, index) => <pre key={index} className="muted code-value" style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(item, null, 2)}</pre>)}
         </div>
       ))}
-      {entries.length === 0 ? <EmptyState title="No reminders" /> : null}
+      {entries.length === 0 ? <EmptyState title="No reminders" description="You are caught up for now." /> : null}
     </div>
   </>;
 }
-

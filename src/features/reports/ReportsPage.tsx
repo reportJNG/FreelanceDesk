@@ -47,9 +47,12 @@ export function ReportsPage() {
       <RevenueChart data={revenue.data!.monthly} />
       <ProjectStatusChart data={status.data!} />
     </div>
-    <div className="card section-gap action-row">
+    <div className="card section-gap">
+      <h3 className="card-title">Exports</h3>
+      <div className="action-row">
       <button className="button" onClick={exportJson}><Download size={16} /> JSON backup</button>
       {["clients", "projects", "payments", "support-requests"].map((name) => <button key={name} className="button secondary" onClick={() => exportCsv(name)}>{name}.csv</button>)}
+      </div>
     </div>
   </>;
 }

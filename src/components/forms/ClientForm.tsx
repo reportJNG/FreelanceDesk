@@ -13,17 +13,22 @@ export function ClientForm({ initial, onSubmit, submitLabel = "Save client", dis
   });
   return (
     <form className="card grid" onSubmit={handleSubmit((values) => onSubmit({ ...values, tags: values.tagsText?.split(",").map((tag: string) => tag.trim()).filter(Boolean) ?? [], tagsText: undefined }))}>
-      <div className="form-grid">
-        <label className="label">Name<input className="input" {...register("name")} />{errors.name?.message ? <span className="field-error">{errors.name.message}</span> : null}</label>
-        <label className="label">Company<input className="input" {...register("company_name")} /></label>
-        <label className="label">Email<input className="input" {...register("email")} /></label>
-        <label className="label">Phone<input className="input" {...register("phone")} /></label>
-        <label className="label">WhatsApp<input className="input" {...register("whatsapp")} /></label>
-        <label className="label">Website<input className="input" {...register("website")} /></label>
-        <label className="label">Status<select className="select" {...register("status")}>{clientStatuses.map((s) => <option key={s}>{s}</option>)}</select></label>
-        <label className="label">Tags<input className="input" placeholder="landing, ecommerce" {...register("tagsText")} /></label>
+      <section className="form-section">
+        <h2 className="form-section-title">Client details</h2>
+        <div className="form-grid">
+          <label className="label"><span className="label-text">Name</span><input className="input" placeholder="Client name" {...register("name")} />{errors.name?.message ? <span className="field-error">{errors.name.message}</span> : null}</label>
+          <label className="label"><span className="label-text">Company</span><input className="input" placeholder="Company or brand" {...register("company_name")} /></label>
+          <label className="label"><span className="label-text">Email</span><input className="input" type="email" placeholder="client@example.com" {...register("email")} /></label>
+          <label className="label"><span className="label-text">Phone</span><input className="input" placeholder="+1 555 000 0000" {...register("phone")} /></label>
+          <label className="label"><span className="label-text">WhatsApp</span><input className="input" placeholder="+1 555 000 0000" {...register("whatsapp")} /></label>
+          <label className="label"><span className="label-text">Website</span><input className="input" placeholder="https://example.com" {...register("website")} /></label>
+          <label className="label"><span className="label-text">Status</span><select className="select" {...register("status")}>{clientStatuses.map((s) => <option key={s}>{s}</option>)}</select></label>
+          <label className="label"><span className="label-text">Tags</span><input className="input" placeholder="landing, ecommerce" {...register("tagsText")} /></label>
+        </div>
+      </section>
+      <div className="form-section">
+        <label className="label"><span className="label-text">Notes</span><textarea className="textarea" placeholder="Important context, preferences, or follow-up notes" {...register("notes")} /></label>
       </div>
-      <label className="label">Notes<textarea className="textarea" {...register("notes")} /></label>
       <div className="form-actions"><button className="button" disabled={isSubmitting || disabled}>{disabled ? "Saving..." : submitLabel}</button></div>
     </form>
   );

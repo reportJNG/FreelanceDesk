@@ -16,5 +16,5 @@ export function ProjectEditPage({ id }: { id: string }) {
   const mutation = useMutation({ mutationFn: (values: unknown) => projectsApi.update(id, values), onSuccess: () => { toast.success("Project updated"); queryClient.invalidateQueries({ queryKey: ["projects"] }); window.location.href = `/projects/${id}`; }, onError: (error) => toast.error(error instanceof Error ? error.message : "Could not update project") });
   if (project.isLoading) return <LoadingState />;
   if (project.error) return <ErrorState error={project.error} />;
-  return <><PageHeader title="Edit Project" /><ProjectForm clients={clients.data?.items ?? []} initial={project.data} onSubmit={(values) => mutation.mutate(values)} disabled={mutation.isPending} /></>;
+  return <><PageHeader title="Edit Project" description="Update project scope, links, credentials references, and financials." /><ProjectForm clients={clients.data?.items ?? []} initial={project.data} onSubmit={(values) => mutation.mutate(values)} disabled={mutation.isPending} /></>;
 }

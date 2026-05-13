@@ -17,6 +17,7 @@ export const navItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
   return (
     <aside className="sidebar">
       <Link className="brand" href="/dashboard">
@@ -25,7 +26,7 @@ export function Sidebar() {
       </Link>
       <nav className="nav">
         {navItems.map(([href, label, Icon]) => (
-          <Link key={href} className={`nav-link ${pathname.startsWith(href) ? "active" : ""}`} href={href}>
+          <Link key={href} className={`nav-link ${isActive(href) ? "active" : ""}`} href={href} aria-current={isActive(href) ? "page" : undefined}>
             <Icon size={18} /> {label}
           </Link>
         ))}

@@ -14,5 +14,5 @@ export function ClientEditPage({ id }: { id: string }) {
   const mutation = useMutation({ mutationFn: (values: unknown) => clientsApi.update(id, values), onSuccess: () => { toast.success("Client updated"); queryClient.invalidateQueries({ queryKey: ["clients"] }); window.location.href = `/clients/${id}`; }, onError: (error) => toast.error(error instanceof Error ? error.message : "Could not update client") });
   if (query.isLoading) return <LoadingState />;
   if (query.error) return <ErrorState error={query.error} />;
-  return <><PageHeader title="Edit Client" /><ClientForm initial={query.data} onSubmit={(values) => mutation.mutate(values)} disabled={mutation.isPending} /></>;
+  return <><PageHeader title="Edit Client" description="Keep contact details, tags, and notes current." /><ClientForm initial={query.data} onSubmit={(values) => mutation.mutate(values)} disabled={mutation.isPending} /></>;
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import { PageHeader } from "../../components/common/PageHeader";
 import { LoadingState } from "../../components/common/LoadingState";
@@ -15,12 +16,12 @@ export function ClientDetailPage({ id }: { id: string }) {
   const client = query.data!;
   return (
     <>
-      <PageHeader title={client.name} action={<a className="button" href={`/clients/${id}/edit`}>Edit client</a>} />
+      <PageHeader title={client.name} description={client.company_name || "Client profile"} action={<Link className="button" href={`/clients/${id}/edit`}>Edit client</Link>} />
       <div className="grid detail-grid">
-        <div className="card"><h3>Contact</h3><div className="info-list"><div>{client.email || "No email"}</div><div className="muted">{client.phone || "No phone"}</div><div className="muted">{client.whatsapp || "No WhatsApp"}</div></div></div>
-        <div className="card"><h3>Profile</h3><div className="info-list"><StatusBadge value={client.status} /><div>{client.company_name || "No company"}</div><div className="muted">{client.website || "No website"}</div></div></div>
-        <div className="card"><h3>Money</h3><div className="info-row"><span>Paid</span><strong>{formatMoney(client.total_paid ?? 0)}</strong></div><div className="info-row"><span>Remaining</span><strong>{formatMoney(client.remaining ?? 0)}</strong></div></div>
-        <div className="card"><h3>Notes</h3><p className="muted">{client.notes || "No notes"}</p></div>
+        <div className="card"><h3 className="card-title">Contact</h3><div className="info-list"><div>{client.email || "No email"}</div><div className="muted">{client.phone || "No phone"}</div><div className="muted">{client.whatsapp || "No WhatsApp"}</div></div></div>
+        <div className="card"><h3 className="card-title">Profile</h3><div className="info-list"><StatusBadge value={client.status} /><div>{client.company_name || "No company"}</div><div className="muted">{client.website || "No website"}</div></div></div>
+        <div className="card"><h3 className="card-title">Money</h3><div className="info-row"><span>Paid</span><strong>{formatMoney(client.total_paid ?? 0)}</strong></div><div className="info-row"><span>Remaining</span><strong>{formatMoney(client.remaining ?? 0)}</strong></div></div>
+        <div className="card"><h3 className="card-title">Notes</h3><p className="muted">{client.notes || "No notes"}</p></div>
       </div>
     </>
   );
