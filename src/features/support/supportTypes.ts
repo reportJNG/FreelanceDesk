@@ -1,0 +1,21 @@
+export type SupportRequest = {
+  id: string;
+  client_id: string;
+  project_id?: string | null;
+  title: string;
+  description?: string | null;
+  request_type: string;
+  priority: string;
+  status: string;
+  price: number;
+  requested_at?: string | null;
+  due_date?: string | null;
+  completed_at?: string | null;
+  notes?: string | null;
+  created_at: string;
+  updated_at: string;
+  client_name?: string | null;
+  project_name?: string | null;
+  paid_amount?: number;
+  remaining_amount?: number;
+};

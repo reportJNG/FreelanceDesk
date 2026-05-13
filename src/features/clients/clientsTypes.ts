@@ -1,0 +1,25 @@
+export type Client = {
+  id: string;
+  name: string;
+  company_name?: string | null;
+  email?: string | null;
+  phone?: string | null;
+  whatsapp?: string | null;
+  instagram?: string | null;
+  facebook?: string | null;
+  tiktok?: string | null;
+  website?: string | null;
+  country?: string | null;
+  city?: string | null;
+  address?: string | null;
+  source?: string | null;
+  status: string;
+  tags: string[];
+  notes?: string | null;
+  created_at: string;
+  updated_at: string;
+  archived_at?: string | null;
+  projects_count?: number;
+  total_paid?: number;
+  remaining?: number;
+};

@@ -1,0 +1,21 @@
+create index clients_owner_id_idx on public.clients(owner_id);
+create index clients_name_idx on public.clients(name);
+create index clients_company_name_idx on public.clients(company_name);
+create index clients_created_at_idx on public.clients(created_at);
+create index projects_owner_id_idx on public.projects(owner_id);
+create index projects_client_id_idx on public.projects(client_id);
+create index projects_status_idx on public.projects(status);
+create index projects_test_end_date_idx on public.projects(test_end_date);
+create index projects_domain_renewal_date_idx on public.projects(domain_renewal_date);
+create index projects_hosting_renewal_date_idx on public.projects(hosting_renewal_date);
+create index payments_owner_id_idx on public.payments(owner_id);
+create index payments_client_id_idx on public.payments(client_id);
+create index payments_project_id_idx on public.payments(project_id);
+create index payments_paid_at_idx on public.payments(paid_at);
+create index support_requests_owner_id_idx on public.support_requests(owner_id);
+create index support_requests_client_id_idx on public.support_requests(client_id);
+create index support_requests_project_id_idx on public.support_requests(project_id);
+create index support_requests_status_idx on public.support_requests(status);
+create index support_requests_priority_idx on public.support_requests(priority);
+create index support_requests_due_date_idx on public.support_requests(due_date);
+
